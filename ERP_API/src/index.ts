@@ -1,19 +1,46 @@
 import express from 'express';
 import MongoDBService from './Services/mongodb.service';
-import PartController from './Controllers/part.controller';
-import PartRoutes from './Routes/part.routes';
+
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
+import dotenv from 'dotenv'; 
+import partRouter from './Routes/part.routes';
+
+dotenv.config(); // Load environment variables from .env file
 
 const app = express();
-const PORT = 3000;
+const port = process.env.PORT;
 
-const dbService = new MongoDBService();
-dbService.connect('mongodb://localhost:27017', 'your_db_name');
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
+app.use(helmet());
+app.use(compression());
 
-const partController = new PartController(dbService);
-const partRoutes = new PartRoutes(partController);
+app.use('/parts', partRouter);
 
-app.use('/parts', partRoutes.getRouter());
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Error handling middleware
+app.use((err: { stack: any }, req: any, res: { status: (arg0: number) => any; send: (arg0: string) => void }, next: any) => {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
 });
+
+// Check if DATABASE_URL is defined before connecting to MongoDB
+const databaseUrl = process.env.DATABASE_URL;
+if (!databaseUrl) {
+  console.error('DATABASE_URL is not defined. Please check your environment configuration.');
+} else {
+  mongoose.connect(databaseUrl)
+    .then(() => {
+      console.log('Database Connected');
+      app.listen(port, () => {
+        console.log(`STG API running on port ${port}.`);
+      });
+    })
+    .catch((error) => {
+      console.error('MongoDB connection error:', error);
+    });
+}
