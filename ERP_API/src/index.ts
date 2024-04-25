@@ -37,7 +37,7 @@ if (!databaseUrl) {
     .then(() => {
       console.log('Database Connected');
       app.listen(port, () => {
-        console.log(`STG API running on port ${port}.`);
+        console.log(`ERP API running on port ${port}.`);
       });
     })
     .catch((error) => {
