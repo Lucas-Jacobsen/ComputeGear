@@ -7,7 +7,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import dotenv from 'dotenv'; 
-import partRouter from './Routes/part.routes';
+import partRouter from './Part/part.routes';
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(helmet());
 app.use(compression());
 
-app.use('/parts', partRouter);
+app.use('/part', partRouter);
 
 // Error handling middleware
 app.use((err: { stack: any }, req: any, res: { status: (arg0: number) => any; send: (arg0: string) => void }, next: any) => {

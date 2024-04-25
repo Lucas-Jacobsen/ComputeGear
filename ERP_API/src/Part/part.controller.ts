@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Part from "../Models/Part";
+import Part from "./Part";
 
 export const getAllParts = async (req: Request, res: Response) => {
   try{
