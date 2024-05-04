@@ -89,11 +89,9 @@ function AddPartForm() {
         })
         .then(data => {
             console.log('Part added successfully:', data);
-            // Optionally, you can redirect or show a success message here
         })
         .catch(error => {
             console.error('There was a problem adding the part:', error);
-            // Handle errors, show error messages, etc.
         });
     };
 
