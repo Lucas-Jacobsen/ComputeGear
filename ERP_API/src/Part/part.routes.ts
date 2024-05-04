@@ -1,8 +1,9 @@
 import express, { Router } from 'express';
-import {getAllParts} from './part.controller';
+import {getAllParts, createPart} from './part.controller';
 
 const partRouter = express.Router();
 
 partRouter.get("/", getAllParts);
+partRouter.post("/", createPart);
 
 export default partRouter;
