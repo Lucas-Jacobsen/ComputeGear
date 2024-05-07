@@ -1,0 +1,1 @@
+//DDRX, REG/NONREG, TYPE, MHX, Capacity, APPROVED/NON, Vendor ID
