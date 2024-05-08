@@ -46,7 +46,7 @@ const PartTable: React.FC = () => {
         </thead>
         <tbody>
           {parts.map(part => (
-            <tr key={part._id?.$oid}>
+            <tr key={part._id}>
               <td>{part.pn}</td>
               <td>{part.description.join(', ')}</td>
               <td>{part.rev}</td>

@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import mongoose, {Document} from "mongoose";
 
 interface IPart extends Document{
-  _id: { $oid: string };
+  _id: string;
   pn: string;
   description: string[];
   rev: string;
@@ -19,7 +19,7 @@ interface IPart extends Document{
 }
 
 const partSchema = new mongoose.Schema({
-  _id: {type: Number, required: true },
+  _id: {type: String, required: true },
   pn: {type: String, required: true},
   description: {type: [String], required: true},
   rev: {type: String, required: true},

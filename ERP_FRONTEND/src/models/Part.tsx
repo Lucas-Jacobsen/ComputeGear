@@ -1,5 +1,5 @@
 export interface IPart {
-    _id: { $oid: string };
+    _id: string;
     pn: string;
     description: string[];
     rev: string;
@@ -10,7 +10,7 @@ export interface IPart {
     cost: number;
     type: number;
     drawing: string[];
-    assembly: [string, { $numberInt: string }][];
+    assembly: [string, number ][];
     used: string[];
     vendor: string[];
   }
