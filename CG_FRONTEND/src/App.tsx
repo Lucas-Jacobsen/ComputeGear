@@ -1,6 +1,8 @@
 import React from 'react';
 import PartTable from './components/PartTable/PartTable';
-import CreatePart from './components/CreatePart/CreatePart'
+import CreatePart from './components/CreatePart/CreatePart';
+import POTS from './components/POTS/POTS';
+import Configuration from './components/Configuration/Configuration';
 const App: React.FC = () => {
   return (
     <div>
@@ -9,7 +11,9 @@ const App: React.FC = () => {
       </header>
       <main>
         <PartTable />
-        <CreatePart />
+        <CreatePart /><br/> <hr/> <br/>
+        <Configuration /> <br/> <hr/> <br/>
+        <POTS /> 
       </main>
       <footer>
         <p>Footer content goes here</p>
