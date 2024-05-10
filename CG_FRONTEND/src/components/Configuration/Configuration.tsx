@@ -1,119 +1,90 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Component } from 'react';
+import './Configuration.css';
 
 interface ConfigurationProps {}
 
 interface ConfigurationState {
-  partNumberInput: string;
-  partDescriptionInput: string;
-  partNumberData: any[]; // Assuming it's an array of objects
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  partDescriptionData: any[]; // Assuming it's an array of objects
+  selectedOptions: {
+    initial: string | null;
+    additional: string | null;
+  };
+  expandedOptions: { [key: string]: boolean };
 }
 
 class Configuration extends Component<ConfigurationProps, ConfigurationState> {
   constructor(props: ConfigurationProps) {
     super(props);
     this.state = {
-      partNumberInput: '',
-      partDescriptionInput: '',
-      partNumberData: [],
-      partDescriptionData: [],
+      selectedOptions: {
+        initial: null,
+        additional: null,
+      },
+      expandedOptions: {
+        '1U': false,
+        '2U': false,
+        '3U': false,
+        '4U': false,
+        'additionalOptions': false,
+      },
     };
   }
 
-  handlePartNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ partNumberInput: event.target.value });
+  handleButtonClick = (option: string) => {
+    this.setState((prevState) => ({
+      expandedOptions: {
+        ...prevState.expandedOptions,
+        [option]: !prevState.expandedOptions[option],
+      },
+    }));
   };
 
-  handlePartDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ partDescriptionInput: event.target.value });
+  handleOptionSelect = (option: string) => {
+    this.setState((prevState) => ({
+      selectedOptions: {
+        ...prevState.selectedOptions,
+        initial: option,
+      },
+    }));
   };
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Fetch data based on part number and part description inputs
-    // Populate partNumberData and partDescriptionData arrays with fetched data
-    // Example fetch implementation:
-    // fetch('api/data', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ partNumber: this.state.partNumberInput, partDescription: this.state.partDescriptionInput }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   this.setState({ partNumberData: data.partNumberData, partDescriptionData: data.partDescriptionData });
-    // })
-    // .catch(error => console.error('Error:', error));
-
-    // Simulated data for demonstration
-    const simulatedPartNumberData = [{ id: 1, partNumber: '12345', description: 'Part 1' }];
-    const simulatedPartDescriptionData = [{ id: 2, partNumber: '54321', description: 'Part 2' }];
-
-    this.setState({
-      partNumberData: simulatedPartNumberData,
-      partDescriptionData: simulatedPartDescriptionData,
-    });
+  handleAdditionalOptionSelect = (option: string) => {
+    this.setState((prevState) => ({
+      selectedOptions: {
+        ...prevState.selectedOptions,
+        additional: option,
+      },
+    }));
   };
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Part Number:
-            <input type="text" value={this.state.partNumberInput} onChange={this.handlePartNumberChange} />
-          </label>
-          <label>
-            Part Description:
-            <input type="text" value={this.state.partDescriptionInput} onChange={this.handlePartDescriptionChange} />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-        <div>
-          <h2>Part Number Data</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Part Number</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.partNumberData.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.partNumber}</td>
-                  <td>{item.description}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="container">
+        {/* Original 4 buttons */}
+        <div className="initial-buttons">
+          {['1U', '2U', '3U', '4U'].map((option) => (
+            <div key={option} className="initial-button">
+              <button onClick={() => this.handleButtonClick(option)}>{option}</button>
+             
+            </div>
+          ))}
         </div>
-        <div>
-          <h2>Part Description Data</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Part Number</th>
-                <th>Description</th>
+
+        <table className="table-with-buttons">
+          <tbody>
+            {[1, 2, 3, 4].map((index) => (
+              <tr key={index}>
+                <td>
+                  <button onClick={() => this.handleButtonClick(`Table${index}`)}>Press me</button>
+                </td>
+                <td>Column 2</td>
+                <td>Column 3</td>
+                <td>Column 4</td>
               </tr>
-            </thead>
-            <tbody>
-              {this.state.partDescriptionData.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.partNumber}</td>
-                  <td>{item.description}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+
+       
       </div>
     );
   }

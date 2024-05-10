@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+  }
+  
+  .initial-button {
+    margin-right: 10px; /* Adjust margin as needed */
+    float: left;
+    
+  }
+  
+  .option-menu {
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .table-with-buttons {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Adjust as needed */
+  }
+  
+  .table-with-buttons td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .table-with-buttons button {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .additional-table {
+    width: 100%;
+    margin-top: 20px; /* Adjust as needed */
+  }
+  
+  .additional-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .option-menu {
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
