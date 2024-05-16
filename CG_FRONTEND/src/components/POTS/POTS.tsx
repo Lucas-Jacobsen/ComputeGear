@@ -11,6 +11,8 @@ interface RowData {
   price: string;
 }
 
+//https://stackoverflow.com/questions/75830686/read-excel-xlsx-file-in-typescript
+
 const POTS: React.FC = () => {
   const [tableData, setTableData] = useState<RowData[]>([
     { type: "CHK", requirement: "", pn: "", description: "", quantity: "", cost: "", notes: "", price: "" }
